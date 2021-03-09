@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.teams.NewTeamFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Hello"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_text_name_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:textSize="@dimen/sub_title_size"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_enter_the_team_name" />
+
+        <Button
+            android:id="@+id/add_pokemon_to_team"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:text="@string/hint_add_pokemon"
+            app:icon="@drawable/ic_add_new_item_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_delete_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:text="@string/txt_delete_team" />
+
+            <Button
+                android:id="@+id/btn_save_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:text="@string/save_team" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:textSize="@dimen/sub_title_size"
+            android:text="@string/txt_your_pokemon_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_pokemon_team"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_marginBottom="70dp"
+            tools:listitem="@layout/item_pokemon_team" />
+
+    </LinearLayout>
+
+</FrameLayout>

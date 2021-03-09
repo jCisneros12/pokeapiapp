@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">PokeApi App</string>
+    <string name="title_regions">Regions</string>
+    <string name="title_share">Share</string>
+    <string name="title_teams">Teams</string>
+    <string name="text_region_name">Region name</string>
+    <string name="txt_your_pokemon_list">Pokemon list</string>
+    <string name="hint_enter_the_team_name">Enter the team name</string>
+    <string name="hint_add_pokemon">Add pokemon</string>
+    <string name="hiny_pokemon_name">Pokemon name</string>
+    <string name="hint_type">Type</string>
+    <string name="hint_pokemon">Pokemon</string>
+    <string name="fragment_new_team">Pokemon Team</string>
+    <string name="hint_pokedex">97</string>
+    <string name="txt_delete_team">delete</string>
+    <string name="save_team">Save</string>
+    <string name="search">Search</string>
+    <string name="enter_pokemon_name">Enter pokemon name, ex: Pikachu</string>
+    <string name="email">Email</string>
+    <string name="register">register</string>
+    <string name="login">Button</string>
+    <string name="loginbtn">Login</string>
+    <string name="hint_password">password</string>
+    <string name="text_team_name">Team Name</string>
+</resources>

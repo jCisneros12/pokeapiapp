@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_regions">
+
+    <fragment
+        android:id="@+id/navigation_regions"
+        android:name="com.jcisneros.pokeapiapp.ui.regions.RegionsFragment"
+        android:label="@string/title_regions"
+        tools:layout="@layout/fragment_regions" />
+
+    <fragment
+        android:id="@+id/navigation_teams"
+        android:name="com.jcisneros.pokeapiapp.ui.teams.TeamsFragment"
+        android:label="@string/title_teams"
+        tools:layout="@layout/fragment_teams">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_newTeamFragment"
+            app:destination="@id/new_team_fragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/fragment_open_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_share"
+        android:name="com.jcisneros.pokeapiapp.ui.share.ShareFragment"
+        android:label="@string/title_share"
+        tools:layout="@layout/fragment_share" />
+    <fragment
+        android:id="@+id/new_team_fragment"
+        android:name="com.jcisneros.pokeapiapp.ui.teams.NewTeamFragment"
+        android:label="@string/fragment_new_team"
+        tools:layout="@layout/fragment_new_team">
+        <action
+            android:id="@+id/action_newTeamFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_teams" />
+        <action
+            android:id="@+id/action_newTeamFragment_to_pokemonListFragment"
+            app:destination="@id/pokemon_list_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemon_list_fragment"
+        android:name="com.jcisneros.pokeapiapp.ui.pokemon.PokemonListFragment"
+        android:label="@string/hint_pokemon"
+        tools:layout="@layout/fragment_pokemon_list">
+        <action
+            android:id="@+id/action_pokemonListFragment_to_newTeamFragment"
+            app:destination="@id/new_team_fragment" />
+    </fragment>
+</navigation>
