@@ -64,10 +64,28 @@ class FirebaseService {
         var teamUser: List<UserTeam>
          db.collection("users").document(user.emal)
             .collection("teams").document()
-            .get().addOnSuccessListener {
-                 Log.i("FIREBASE", it.get("nameTeam").toString())
-                 Log.i("FIREBASE SIZE", it.get("tokenTeam").toString())
-             }
+            .get()
+
+    }
+    //for get teams of user
+    fun getAllTeams(user: User) {
+//        var teamsNames
+        var teamUser: List<UserTeam>
+        db.collection("users").document(user.emal)
+            .collection("teams")
+            .get().addOnSuccessListener { res->
+                for (document in res){
+                    val teamName = document.data
+                    val pokemonName = document.data.get("pokemonTeam")
+                    Log.d("FIRESTORE TEAMS NAME", "${document.data.get("teamName")}")
+                    Log.d("FIRESTORE POKEMONS", "${document.data.get("pokemonTeam")}")
+                }
+
+            }
+
+    }
+
+    fun formatQueryToTeamObject(){
 
     }
 

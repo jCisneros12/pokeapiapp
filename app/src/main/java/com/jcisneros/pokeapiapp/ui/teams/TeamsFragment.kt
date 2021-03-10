@@ -45,6 +45,7 @@ class TeamsFragment : Fragment() {
 
         //get teams list
         teamsViewModel.getAllTeams(userEmailLogin)
+        teamsViewModel.getAllTeamsFirebase(userEmailLogin)
 
         val root = inflater.inflate(R.layout.fragment_teams, container, false)
 
@@ -61,10 +62,9 @@ class TeamsFragment : Fragment() {
             view.findNavController().navigate(R.id.action_navigation_dashboard_to_newTeamFragment)
         }
 
-        teamsViewModel.teamsPokemonUser.observe(viewLifecycleOwner, Observer { teams ->
-
-            val listOfTeams: MutableList<UserTeam> = mutableListOf(teams)
-            mAdapter.recyclerAdapter(listOfTeams, root.context)
+        teamsViewModel.teamsPokemonUserList.observe(viewLifecycleOwner, Observer { teams ->
+            val pokemonList = teams as MutableList<UserTeam>
+            mAdapter.recyclerAdapter(pokemonList, root.context)
         })
 
         return root
