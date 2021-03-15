@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jcisneros.pokeapiapp.R
 import com.jcisneros.pokeapiapp.datasource.models.User
-import com.jcisneros.pokeapiapp.ui.pokemon.PokemonListViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,12 +43,12 @@ class LoginActivity : AppCompatActivity() {
         })
 
         viewModel.userData.observe(this, Observer { userData ->
-            Toast.makeText(this, userData.emal, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, userData.email, Toast.LENGTH_SHORT).show()
             //if user login and return data
             val prefs = getSharedPreferences("com.jcisneros.pokeapiapp", Context.MODE_PRIVATE)
                 .edit()
             //save email for login
-            prefs.putString("emailLogin", userData.emal).apply()
+            prefs.putString("emailLogin", userData.email).apply()
         })
 
         //register user

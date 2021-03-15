@@ -57,6 +57,10 @@ class NewTeamFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_new_team, container, false)
+
+        //get the data bundle arguments
+        val idTeam = arguments?.getString("idTeam")
+
         //init components from UI
         btnAddPokemonToTeam = root.findViewById(R.id.add_pokemon_to_team)
         btnSaveTeam = root.findViewById(R.id.btn_save_team)
@@ -82,6 +86,7 @@ class NewTeamFragment : Fragment() {
             startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
         }
 
+        //set list of pokemons selected
         viewModelPokemon.pokemonTeamListData.observe(viewLifecycleOwner, Observer { pokemonTeam ->
             val listToAdapter: MutableList<PokemonInfo> = pokemonsSelected
             mAdapter.recyclerAdapter(listToAdapter, root.context)
@@ -92,6 +97,27 @@ class NewTeamFragment : Fragment() {
                 btnSaveTeam.visibility = VISIBLE
             }
         })
+
+        //set list of pokemon list
+        if(idTeam!=null){
+            viewModelNewTeam.getPokemonList(idTeam, userEmailLogin)
+            //observe the list of pokemons
+            viewModelNewTeam.pokemonListTeam.observe(viewLifecycleOwner, Observer { pokemons ->
+                val pokemonListArray = ArrayList<PokemonInfo>()
+                val pokemonList: MutableList<PokemonInfo>
+                for (pokemon in pokemons){
+                    val pokemonInfo = PokemonInfo(
+                            pokemon.name,
+                            pokemon.pokedex,
+                            listOf(Types(Type(pokemon.type))),
+                            Sprites(pokemon.sprite)
+                    )
+                    pokemonListArray.add(pokemonInfo)
+                }
+                pokemonList = pokemonListArray
+                mAdapter.recyclerAdapter(pokemonList, root.context)
+            })
+        }
 
         btnSaveTeam.setOnClickListener{
             if(editTxtTeamName.text.isEmpty()){
@@ -156,6 +182,5 @@ class NewTeamFragment : Fragment() {
         randomToken = "Team-"+ randomDigit.toString()
         return randomToken
     }
-
 
 }

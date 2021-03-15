@@ -19,15 +19,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 class TeamsViewModel : ViewModel() {
 
-
-    //array
-    val arrayTeam = ArrayList<UserTeam>()
-
     //teams pokemon of user
-    var teamsPokemonUserList = MutableLiveData<List<UserTeam>>()
+    private var _teamList = MutableLiveData<List<UserTeam>>()
 
-    //teams pokemon of user
-    var teamsPokemonUser = MutableLiveData<UserTeam>()
+    //public list of pokemon teams
+    val teamList: LiveData<List<UserTeam>>
+        get() = _teamList
 
     //data source references
     var datasource: FirebaseService
@@ -37,40 +34,31 @@ class TeamsViewModel : ViewModel() {
         datasource = FirebaseService()
     }
 
-
     //method for get teams of user
     fun getAllTeams(user: User){
         viewModelScope.let {
-            datasource.getAllTeams(user)
-            teamsPokemonUserList.postValue(arrayTeam)
-
+            getTeams(user)
         }
     }
 
-    //firestore db instance
-    private val db = FirebaseFirestore.getInstance()
-
-    fun getAllTeamsFirebase(user: User) {
-        db.collection("users").document(user.emal)
-            .collection("teams")
-            .get().addOnSuccessListener { res->
-                for (document in res){
-                    //get pokemons of team
-                    val listOfPokemon = listOf<PokemonInfo>()
-                    //var teamsPokemonUser = MutableLiveData<UserTeam>()
-                        val userTeam = UserTeam(
-                            document.data.get("teamName").toString(),
-                            document.data.get("teamToken").toString(),
-                            listOfPokemon
-                        )
-                    if(res.size()!=arrayTeam.size){
-                        arrayTeam.add(userTeam)
-                    }
-
-                }
+    //get teams from data source method selected (in this case Firestore)
+    private fun getTeams(user: User){
+        datasource.getAllTeams(user).addOnSuccessListener { res->
+            val arrayAllTeams = ArrayList<UserTeam>()
+            for (document in res){
+                //get pokemons of team
+                val listOfPokemon = listOf<PokemonInfo>()
+                //var teamsPokemonUser = MutableLiveData<UserTeam>()
+                val userTeam = UserTeam(
+                        document.data.get("name").toString(),
+                        document.id,
+                        listOfPokemon
+                )
+                arrayAllTeams.add(userTeam)
             }
+            _teamList.value = arrayAllTeams
 
+        }
     }
-
 }
 
